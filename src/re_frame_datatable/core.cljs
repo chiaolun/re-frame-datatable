@@ -338,6 +338,7 @@
                {:keys [::selection]} state
                {:keys [::table-classes
                        ::tr-class-fn
+                       ::tr-style-fn
                        ::header-enabled?
                        ::extra-header-row-component
                        ::footer-component
@@ -405,7 +406,9 @@
                     (merge
                       {}
                       (when tr-class-fn
-                        (css-class-str (tr-class-fn data-entry))))
+                        (css-class-str (tr-class-fn data-entry)))
+                      (when tr-style-fn
+                        (tr-style-fn data-entry)))
 
                     (when (::enabled? selection)
                       [:td
